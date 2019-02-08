@@ -9,20 +9,30 @@ import Link from '../Link';
 const Container = styled('div')``;
 const Name = styled('span')``;
 const Phone = styled('span')``;
+const City = styled('span')``;
 
 const Contact = ({
   className,
   id,
+  email,
   name: { first, last },
+  cell,
   phone,
+  location: { city, street },
   picture: { thumbnail },
 }) => (
-  <Link to={id}>
+  <Link
+    to={{
+      pathname: id,
+      state: { first, last, email, cell, phone, city, street },
+    }}
+  >
     <article className={className}>
       <Avatar image={thumbnail} name={`${first} ${last}`} />
       <Container>
         <Name>{`${first} ${last}`}</Name>
         <Phone>{phone}</Phone>
+        <City>{city}</City>
       </Container>
     </article>
   </Link>
@@ -30,6 +40,8 @@ const Contact = ({
 
 Contact.defaultProps = {
   className: '',
+  email: '',
+  cell: '',
   phone: '',
   picture: {},
 };
@@ -42,7 +54,13 @@ Contact.propTypes = {
     last: PropTypes.string,
     title: PropTypes.string,
   }).isRequired,
+  email: PropTypes.string,
+  cell: PropTypes.string,
   phone: PropTypes.string,
+  location: PropTypes.shape({
+    city: PropTypes.string,
+    street: PropTypes.string,
+  }).isRequired,
   picture: PropTypes.shape({
     thumbnail: PropTypes.string,
   }),

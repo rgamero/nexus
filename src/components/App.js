@@ -12,7 +12,7 @@ const App = () => (
   <Router>
     <Theme>
       <AddressBook>
-        <Route path="/:id" component={ContactDetails} />
+        <Route path="/:id" render={props => <ContactDetails {...props} />} />
         <Route component={Empty} />
       </AddressBook>
     </Theme>

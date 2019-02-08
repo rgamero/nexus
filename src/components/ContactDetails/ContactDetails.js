@@ -12,21 +12,21 @@ const Header = styled('header')``;
 class ContactDetails extends Component {
   static defaultProps = {
     className: '',
+    location: {},
   };
 
   static propTypes = {
     className: PropTypes.string,
-  };
-
-  state = {
-    data: { name: '[name]' },
+    location: PropTypes.shape({}),
   };
 
   componentDidMount() {}
 
   render() {
-    const { className } = this.props;
-    const { data } = this.state;
+    const {
+      className,
+      location: { state },
+    } = this.props;
 
     return (
       <article className={className}>
@@ -34,9 +34,15 @@ class ContactDetails extends Component {
           <Link to="/">
             <Icon>arrow_back_ios</Icon>
           </Link>
-          {data.name}
+          {state.first} 
+          {' '}
+          {state.last}
         </Header>
-        <Container>You need to implement the view here</Container>
+        <Container>{state.email}</Container>
+        <Container>{state.cell}</Container>
+        <Container>{state.phone}</Container>
+        <Container>{state.city}</Container>
+        <Container>{state.street}</Container>
       </article>
     );
   }
